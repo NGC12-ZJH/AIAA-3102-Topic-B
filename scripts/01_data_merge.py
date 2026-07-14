@@ -6,15 +6,15 @@ from text_utils import normalize_text
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RAW_SMS_PATH = os.path.join(ROOT_DIR, "data", "SMSSpamCollection")
 SPLIT_MANIFEST_PATH = os.path.join(ROOT_DIR, "data", "split_manifest.csv")
-OUTPUT_TABLE_PATH = os.path.join(ROOT_DIR, "outputs", "canonical_table.csv")
+OUTPUT_TABLE_PATH = os.path.join(ROOT_DIR, "results", "canonical_table.csv")
 
-# 自动创建outputs文件夹（不存在则新建）
-os.makedirs(os.path.join(ROOT_DIR, "outputs"), exist_ok=True)
+# 自动创建results文件夹（不存在则新建）
+os.makedirs(os.path.join(ROOT_DIR, "results"), exist_ok=True)
 
 # ===================== 步骤1：读取UCI原始短信文件，生成uci_row_number（从1开始） =====================
 def load_raw_sms() -> pd.DataFrame:
     raw_rows = []
-    with open(RAW_SMS_PATH, "r", encoding="latin-1") as f:
+    with open(RAW_SMS_PATH, "r", encoding="utf-8") as f:
         for line_idx, line in enumerate(f):
             # uci_row_number = 行号+1，1起始
             uci_row = line_idx + 1
